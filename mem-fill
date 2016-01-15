@@ -1,6 +1,21 @@
 #! /usr/env/python
 
+import os
+import psutil
+
+PROCESS = psutil.Process(os.getpid())
+MEGA = 10 ** 6
+MEGA_STR = ' ' * MEGA
+
+def pmem():
+    tot, avail, percent, used, free = psutil.virtual_memory()
+    tot, avail, used, free = tot / MEGA, avail / MEGA, used / MEGA, free / MEGA
+    proc = PROCESS.get_memory_info()[1] / MEGA
+    print('process = %s total = %s avail = %s used = %s free = %s percent = %s'
+          % (proc, tot, avail, used, free, percent))
+
 a = []
 while True:
+    pmem()
     print len(a)
     a.append(' ' * 10**6)
