@@ -3,16 +3,14 @@
 import os
 import psutil
 
-PROCESS = psutil.Process(os.getpid())
 MEGA = 10 ** 6
 MEGA_STR = ' ' * MEGA
 
 def pmem():
-    tot, avail, percent, used, free = psutil.virtual_memory()
-    tot, avail, used, free = tot / MEGA, avail / MEGA, used / MEGA, free / MEGA
-    proc = PROCESS.get_memory_info()[1] / MEGA
-    print('process = %s total = %s avail = %s used = %s free = %s percent = %s'
-          % (proc, tot, avail, used, free, percent))
+    tot, avail, percent, used, free, active, inactive, buffer, cached = psutil.virtual_memory()
+    tot, avail, used, free , active, inactive, buffer, cached = tot / MEGA, avail / MEGA, used / MEGA, free / MEGA , active / MEGA ,inactive / MEGA, buffer / MEGA, cached / MEGA
+    print('total = %s avail = %s used = %s free = %s percent = %s active = %s inactive = %s buffer = %s cached = %s'
+          % (tot, avail, used, free, percent, active, inactive, buffer, cached))
 
 a = []
 while True:
